@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HYC TempMail & TempInfo Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #c2185b;
+    }
+    .logo {
+      display: block;
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 20px;
+      background: #c2185b;
+      border-radius: 50%;
+      color: white;
+      font-size: 32px;
+      line-height: 80px;
+      text-align: center;
+      font-weight: bold;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+    }
+    .generate-btn {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      font-size: 16px;
+      margin-top: 20px;
+      background-color: #c2185b;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .generate-btn:hover {
+      background-color: #880e4f;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input[type="text"], input[type="tel"], input[type="email"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .info-box {
+      margin-top: 20px;
+      padding: 15px;
+      background: #fff9f9;
+      border-left: 5px solid #c2185b;
+    }
+    .features {
+      margin-top: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .feature-item {
+      flex: 1 1 30%;
+      background: #fce4ec;
+      padding: 10px;
+      border-radius: 5px;
+      text-align: center;
+      color: #7b1fa2;
+    }
+    iframe {
+      width: 100%;
+      height: 400px;
+      margin-top: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    footer {
+      margin-top: 30px;
+      text-align: center;
+      font-size: 14px;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo">HYC</div>
+    <h1>HYC TempMail & TempInfo Generator</h1>
+
+    <button class="generate-btn" onclick="generateAll()">Generate Temp Info</button>
+
+    <label for="tempEmail">Temporary Email (@gmail.com):</label>
+    <input type="email" id="tempEmail" readonly />
+
+    <label for="tempPhone">Indian Phone Number:</label>
+    <input type="tel" id="tempPhone" readonly />
+
+    <label for="tempCard">Temporary Credit Card (Test Only):</label>
+    <input type="text" id="tempCard" readonly />
+
+    <label for="tempExp">Expiration Date:</label>
+    <input type="text" id="tempExp" readonly />
+
+    <label for="tempCVV">CVV:</label>
+    <input type="text" id="tempCVV" readonly />
+
+    <div class="features">
+      <div class="feature-item">📧 Temporary Gmail</div>
+      <div class="feature-item">📥 Receive Messages</div>
+      <div class="feature-item">📞 Indian Mobile</div>
+      <div class="feature-item">💳 Test Credit Card</div>
+      <div class="feature-item">⏱️ Quick Access</div>
+      <div class="feature-item">🔁 Regenerate Anytime</div>
+    </div>
+
+    <p style="margin-top:20px; text-align:center;">
+      Use the generated email to receive test messages.<br/>
+      Check inbox below or visit external temp mail service.
+    </p>
+
+    <!-- Embedded Inbox Viewer -->
+    <iframe src="https://www.mailinator.com/ " title="Mail Inbox"></iframe>
+
+    <footer>
+      Powered by HYC Technologies Pvt Ltd © 2025
+    </footer>
+  </div>
+
+  <script>
+    function generateEmail() {
+      const base = Math.random().toString(36).substring(2, 8); // random string
+      const number = Math.floor(Math.random() * 1000); // random number
+      return `${base}${number}@gmail.com`;
+    }
+
+    function generatePhoneNumber() {
+      const prefixes = ['7', '8', '9']; // Indian mobile number prefixes
+      const prefix = prefixes[Math.floor(Math.random() * prefixes.length)];
+      const rest = Math.floor(10000000 + Math.random() * 90000000); // 8 digits
+      return `+91 ${prefix}${rest}`;
+    }
+
+    function generateCreditCard() {
+      const prefixes = ['4532', '4556', '4916', '4539', '4929'];
+      let card = prefixes[Math.floor(Math.random() * prefixes.length)];
+      for (let i = 0; i < 3; i++) {
+        card += '-' + Math.floor(1000 + Math.random() * 9000);
+      }
+      return card;
+    }
+
+    function generateExpDate() {
+      const month = Math.floor(Math.random() * 12) + 1;
+      const year = new Date().getFullYear() + Math.floor(Math.random() * 5);
+      return `${month.toString().padStart(2, '0')}/${year.toString().substr(-2)}`;
+    }
+
+    function generateCVV() {
+      return Math.floor(100 + Math.random() * 900);
+    }
+
+    function generateAll() {
+      document.getElementById('tempEmail').value = generateEmail();
+      document.getElementById('tempPhone').value = generatePhoneNumber();
+      document.getElementById('tempCard').value = generateCreditCard();
+      document.getElementById('tempExp').value = generateExpDate();
+      document.getElementById('tempCVV').value = generateCVV();
+    }
+  </script>
+</body>
+</html>
